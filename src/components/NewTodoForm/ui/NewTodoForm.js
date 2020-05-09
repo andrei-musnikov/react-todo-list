@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { NewTodoFormContainer } from '../../NewTodoForm';
 import './style.css'
 
-const NewTodoForm = () => {
+const NewTodoForm = (props) => {
     const [inputValue, setInputValue] = useState('')
+    const { todos, onCreatePressed } = props
 
     return (
         <div className="new-todo-form">
@@ -13,11 +15,19 @@ const NewTodoForm = () => {
                 value={inputValue}
                 onChange={e => setInputValue(e.target.value)}
             />
-            <button className="new-todo-button">Create Todo</button>
+            <button
+                onClick={() => {
+                    const isDuplicateText =
+                        todos.some(todo => todo.text === inputValue)
+                    if (!isDuplicateText) {
+                        onCreatePressed(inputValue)
+                        setInputValue('')
+                    }
+
+                }}
+                className="new-todo-button">Create Todo</button>
         </div>
     )
+
 }
-
 export { NewTodoForm }
-
-
