@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
-import { NewTodoFormContainer } from '../../NewTodoForm';
 import './style.css'
 
 const NewTodoForm = (props) => {
     const [inputValue, setInputValue] = useState('')
+
     const { todos, onCreatePressed } = props
+
+    console.log(todos);
+    console.log(inputValue);
 
     return (
         <div className="new-todo-form">
@@ -23,11 +26,9 @@ const NewTodoForm = (props) => {
                         onCreatePressed(inputValue)
                         setInputValue('')
                     }
-
                 }}
                 className="new-todo-button">Create Todo</button>
         </div>
     )
-
 }
 export { NewTodoForm }
